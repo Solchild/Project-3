@@ -1,6 +1,28 @@
-#PROGRAM: Project 3
+#PROGRAM: Project 2
   .data
   insert_into: .word 4 #space for the input to be loaded into
   empty_string: .asciiz ""
   isEmpty_string: .asciiz "Input is empty."
   long_string: .asciiz "Input is too long."
+  invalid_string: .asciiz "Invalid base-27 number."
+  .text
+main:
+begin:  
+  la $a0, insert_into
+  la $a1, insert_into
+  li $v0, 8
+  syscall         #take input from user
+  
+  lw $t0, empty_string
+  beq $a0, $zero, Empty
+  j Exit
+  
+  
+Empty:
+  li $v0, 4
+  la $a0, isEmpty_string
+  syscall
+  
+Exit:
+  li $v0, 10
+  syscall         #Exit Program
